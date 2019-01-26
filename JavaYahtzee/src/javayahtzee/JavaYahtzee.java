@@ -13,9 +13,8 @@ public class JavaYahtzee {
     public static void main(String[] args) {
         final int DICE_IN_PLAY = 5;
         int hand[] = new int[DICE_IN_PLAY];
-        // srand(time(0));
         char playAgain = 'y';
-        
+        Scanner scan = new Scanner(System.in);
         while (playAgain == 'y') {
             String keep = "nnnnn"; //setup to roll all dice in the first roll
             int turn = 1;
@@ -23,8 +22,20 @@ public class JavaYahtzee {
                 // roll dice not kept
                 for (int dieNumber = 0; dieNumber < DICE_IN_PLAY; dieNumber++) {
                     if (keep.charAt(dieNumber) != 'y')
-                        System.out.println();// hand[dieNumber] = rollDie();
+                        hand[dieNumber] = rollDie();
                 }
+                // output roll
+                System.out.print("\"Your roll was: ");
+                for (int dieNumber = 0; dieNumber < DICE_IN_PLAY; dieNumber++) {
+                    System.out.print(hand[dieNumber] + " ");
+                }
+                System.out.println();
+                //if not the last roll of the hand prompt the user for dice to keep
+                if (turn < 3) {
+                    System.out.print("enter dice to keep (y or n) ");
+                    keep = scan.next();
+                }
+                turn++;
             }
         }
     }
